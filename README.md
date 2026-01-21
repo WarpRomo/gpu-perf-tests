@@ -20,6 +20,18 @@ This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T
 | `bench_fp16.cu` | Compares the throughput of FP32 `float` operations against FP16 `__half` intrinsic operations. |
 | `generate_plot.py` | Python script that parses CSV output from the benchmarks and generates log-log performance graphs. |
 
+## Results
+
+**Vector Addition Performance**
+<div align="center">
+  <img width="1000" src="./vector_benchmark.png" alt="Vector Benchmark Graph" />
+</div>
+
+**Matrix Multiplication Performance**
+<div align="center">
+  <img width="1000" src="./matrix_benchmark.png" alt="Matrix Benchmark Graph" />
+</div>
+
 ## Prerequisites
 
 *   **Instance:** AWS EC2 `g4dn.xlarge` (or larger).
@@ -61,15 +73,3 @@ Run the hardware-specific diagnostic tests (Bandwidth, Overlap, FP16).
 chmod +x run_advanced.sh
 ./run_advanced.sh
 ```
-
-## Sample Graphs
-
-**Vector Addition Performance**
-<div align="center">
-  <img width="1000" src="./vector_benchmark.png" alt="Vector Benchmark Graph" />
-</div>
-
-**Matrix Multiplication Performance**
-<div align="center">
-  <img width="1000" src="./matrix_benchmark.png" alt="Matrix Benchmark Graph" />
-</div>
