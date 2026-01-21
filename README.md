@@ -36,7 +36,7 @@ This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T
 
 Sample output from `run_advanced.sh` on a `g4dn.xlarge` instance.
 
-### 1. PCIe Bandwidth (Host to Device)
+#### PCIe Bandwidth (Host to Device)
 Comparing standard `malloc` (Pageable) against `cudaMallocHost` (Pinned/DMA) transfers.
 
 | Transfer Size | Pageable Speed | Pinned Speed |
@@ -45,7 +45,7 @@ Comparing standard `malloc` (Pageable) against `cudaMallocHost` (Pinned/DMA) tra
 | **100 MB** | 6.15 GB/s | 6.27 GB/s |
 | **500 MB** | 6.20 GB/s | 6.27 GB/s |
 
-### 2. Precision Scaling (FP32 vs FP16)
+#### Precision Scaling (FP32 vs FP16)
 Measuring the throughput advantage of Tensor Cores using `__half` intrinsics.
 
 | Precision | Execution Time | Speedup |
@@ -53,7 +53,7 @@ Measuring the throughput advantage of Tensor Cores using `__half` intrinsics.
 | **FP32** (Float) | 0.0328 s | 1.0x |
 | **FP16** (Half) | 0.0180 s | **1.82x** |
 
-### 3. Stream Overlap
+#### Stream Overlap
 *   **Pipeline Latency:** 9430.69 µs
 *   **Efficiency:** The CPU successfully executed ~500 Billion operations *simultaneously* while the GPU was processing the kernel, demonstrating effective latency hiding via CUDA Streams.
 
@@ -74,7 +74,7 @@ chmod +x setup_cuda.sh
 
 ## Usage
 
-### 1. Standard Benchmarks
+### Standard Benchmarks
 Run the Vector Addition or Matrix Multiplication suites. These scripts automatically compile the binaries and generate visualization images.
 
 ```bash
@@ -91,7 +91,7 @@ Run the Vector Addition or Matrix Multiplication suites. These scripts automatic
 *   `vector_benchmark.png` / `vector_results.csv`
 *   `matrix_benchmark.png` / `matrix_results.csv`
 
-### 2. Advanced Micro-Benchmarks
+### Advanced Micro-Benchmarks
 Run the hardware-specific diagnostic tests (Bandwidth, Overlap, FP16).
 
 ```bash
