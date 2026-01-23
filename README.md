@@ -31,6 +31,11 @@ This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T
   <img width="1000" src="./matrix_benchmark.png" alt="Matrix Benchmark Graph" />
 </div>
 
+**Amazon EFA Networking Performance**
+<div align="center">
+  <img width="1000" src="./efa_benchmark.png" alt="EFA Benchmark" />
+</div>
+
 ## Micro-Benchmark Results
 
 Sample output from `run_advanced.sh` on a `g4dn.xlarge` instance.
