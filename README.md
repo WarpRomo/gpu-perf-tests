@@ -100,28 +100,47 @@ chmod +x run_advanced.sh
 ./run_advanced.sh
 ```
 
-### Soft-RoCE Network Benchmark (Multi-Node)
-This test requires **two** AWS instances in the same VPC/Subnet.
+## Usage: Network Benchmarks
 
-1.  **Configure Security Groups:** Ensure the security group attached to both instances allows **All Traffic** from itself (Self-referencing rule) or from `0.0.0.0/0`.
-2.  **Setup & Compile (Run on BOTH nodes):**
-    ```bash
-    cd soft-roce
-    chmod +x setup_roce.sh compile_net.sh
-    
-    # Installs IBVerbs and loads RXE kernel module
-    ./setup_roce.sh 
-    
-    # Compiles the binary
-    ./compile_net.sh
-    ```
-3.  **Run the Benchmark:**
-    *   **On Instance A (Server):**
-        ```bash
-        ./bench_net server
-        ```
-    *   **On Instance B (Client):**
-        ```bash
-        # Replace with Instance A's Private IP
-        ./bench_net client 172.31.X.X
+### Option A: Soft-RoCE (Cheap, Low Performance)
+Works on any instance size (e.g., `g4dn.xlarge`). Good for testing code logic.
+
+1.  **Setup (Both Nodes):** `cd soft-roce && ./setup_roce.sh && ./compile_net.sh`
+2.  **Run Server:** `./bench_net server`
+3.  **Run Client:** `./bench_net client <SERVER_IP>`
+
+### Option B: AWS EFA (High Performance)
+**Requirements:**
+*   **Instance:** Must use `g4dn.8xlarge` or larger (smaller sizes do not support EFA).
+*   **Launch Config:** You **MUST** check "Enable Elastic Fabric Adapter" in the Network Settings during launch.
+*   **Placement Group:** Instances should be in a "Cluster" placement group for low latency.
+
+**Step 1: Setup & Reboot (Both Nodes)**
+The EFA driver updates the kernel. You must reboot.
+```bash
+cd efa_benchmark
+./setup_node.sh
+sudo reboot
+```
+
+**Step 2: SSH Configuration (Both Nodes)**
+After reboot, login and configure passwordless SSH.
+```bash
+cd efa_benchmark
+./configure_ssh.sh
+# COPY output key from Node A -> ~/.ssh/authorized_keys on Node B
+# COPY output key from Node B -> ~/.ssh/authorized_keys on Node A
+# VERIFY by running: ssh <OTHER_IP> (It must not ask for a password)
+```
+
+**Step 3: Run Benchmark (Node 1)**
+```bash
+./run_nccl.sh <NODE_1_IP> <NODE_2_IP>
+```
+
+### Troubleshooting EFA
+If the benchmark hangs or fails:
+1.  **Check Firewall:** EFA uses the SRD protocol, not TCP. Ensure your Security Group Inbound Rule allows **All Traffic**.
+2.  **Disable Ptrace:** Ubuntu re-enables Ptrace on reboot. Run `sudo sysctl -w kernel.yama.ptrace_scope=0`.
+3.  **Test Hardware:** Run `/opt/amazon/efa/bin/fi_pingpong -p efa -e rdm`. If this hangs, it is a firewall issue.
         ```
