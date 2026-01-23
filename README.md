@@ -15,9 +15,12 @@ This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T
 | `bench_vector_add.cu` | CUDA kernel for Vector Addition ($C = A + B$). Measures execution time for array sizes ranging from small to large. |
 | `bench_matrix_mul.cu` | CUDA kernel for Matrix Multiplication. Comparisons are run against a naive CPU implementation for validation. |
 | `run_advanced.sh` | Compiles and executes the single-node micro-benchmarks (`bandwidth`, `overlap`, `fp16`). |
-| `soft-roce/setup_roce.sh` | Installs RDMA drivers (`ibverbs`, `rdma-core`) and configures the Soft-RoCE (RXE) network interface. |
-| `soft-roce/bench_net_gpu.cu` | Network benchmark comparing TCP sockets against RDMA Verbs (Soft-RoCE) for transferring data to GPU memory. |
-| `soft-roce/compile_net.sh` | Compiles the network benchmark with `ibverbs` linking. |
+| **soft-roce/** | **Directory:** Scripts for benchmarking software-emulated RDMA on standard `g4dn.xlarge` instances. |
+| `soft-roce/setup_roce.sh` | Installs RDMA drivers (`ibverbs`, `rdma-core`) and configures the RXE network interface. |
+| `soft-roce/bench_net_gpu.cu` | Network benchmark comparing TCP sockets against Verbs for transferring data to GPU memory. |
+| **efa_benchmark/** | **Directory:** Scripts for benchmarking hardware EFA on `g4dn.8xlarge` instances using NCCL. |
+| `efa_benchmark/setup_node.sh` | Installs EFA drivers, AWS-OFI-NCCL plugin, and compiles `nccl-tests`. |
+| `efa_benchmark/run_nccl.sh` | Executes the `all_reduce_perf` benchmark over EFA. |
 
 ## Benchmark Results
 
