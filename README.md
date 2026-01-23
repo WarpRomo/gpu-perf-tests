@@ -60,14 +60,8 @@ Measuring the throughput advantage of Tensor Cores using `__half` intrinsics.
 | **FP32** (Float) | 0.0328 s | 1.0x |
 | **FP16** (Half) | 0.0180 s | **1.82x** |
 
-#### Network Transport (Soft-RoCE vs TCP)
-Comparison of transferring 100MB buffers between two `g4dn.xlarge` instances.
-*Note: On instances without hardware RDMA (like g4dn), Soft-RoCE is emulated via CPU, resulting in lower throughput than native TCP.*
-
-| Protocol | Transport Mechanism | Throughput (Approx) |
-| :--- | :--- | :--- |
-| **TCP** | Standard ENA TCP/IP Stack | **~0.56 GB/s** |
-| **Soft-RoCE** | RXE Driver (UDP Encapsulation) | ~0.30 GB/s |
+#### Network Transport (Soft-RoCE vs TCP vs AWS EPA)
+Comparison of transferring 100MB buffers between two `g4dn` instances.
 
 | Configuration | Instance Type | Transport | Throughput | Notes |
 | :--- | :--- | :--- | :--- | :--- |
