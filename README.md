@@ -61,7 +61,7 @@ Measuring the throughput advantage of Tensor Cores using `__half` intrinsics.
 | **FP16** (Half) | 0.0180 s | **1.82x** |
 
 #### Network Transport (Soft-RoCE vs TCP vs AWS EPA)
-Comparison of transferring 100MB buffers between two `g4dn` instances.
+Speed-comparison of transferring 100MB buffers between `g4dn` instances.
 
 | Configuration | Instance Type | Transport | Throughput | Notes |
 | :--- | :--- | :--- | :--- | :--- |
