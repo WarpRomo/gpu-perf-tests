@@ -26,17 +26,17 @@ This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T
 
 **Vector Addition Performance**
 <div align="center">
-  <img width="1000" src="./vector_benchmark.png" alt="Vector Benchmark Graph" />
+  <img width="1000" src="./results/vector_benchmark.png" alt="Vector Benchmark Graph" />
 </div>
 
 **Matrix Multiplication Performance**
 <div align="center">
-  <img width="1000" src="./matrix_benchmark.png" alt="Matrix Benchmark Graph" />
+  <img width="1000" src="./results/matrix_benchmark.png" alt="Matrix Benchmark Graph" />
 </div>
 
 **Amazon EFA Networking Performance**
 <div align="center">
-  <img width="1000" src="./efa_benchmark.png" alt="EFA Benchmark" />
+  <img width="1000" src="./results/efa_benchmark.png" alt="EFA Benchmark" />
 </div>
 
 ## Micro-Benchmark Results
