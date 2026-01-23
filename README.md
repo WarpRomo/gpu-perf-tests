@@ -4,7 +4,7 @@
 [![Platform](https://img.shields.io/badge/platform-AWS%20EC2%20G4dn-orange.svg)](https://aws.amazon.com/ec2/instance-types/g4/)
 [![Stack](https://img.shields.io/badge/Language-C%2B%2B%20%7C%20CUDA-blue.svg)](https://developer.nvidia.com/cuda-zone)
 
-This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T4 GPU on AWS EC2 `g4dn` instances. The suite includes tests for memory bandwidth, compute throughput, stream overlap, precision scaling, and multi-node network latency (Soft-RoCE vs TCP).
+This repository contains C++ and CUDA scripts designed to benchmark the NVIDIA T4 GPU on AWS EC2 `g4dn` instances. The suite includes tests for memory bandwidth, compute throughput, stream overlap, precision scaling, and multi-node network latency (AWS EFA vs Soft-RoCE vs TCP).
 
 ## Files
 
