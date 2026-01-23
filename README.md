@@ -66,6 +66,14 @@ Comparison of transferring 100MB buffers between two `g4dn.xlarge` instances.
 | **TCP** | Standard ENA TCP/IP Stack | **~0.56 GB/s** |
 | **Soft-RoCE** | RXE Driver (UDP Encapsulation) | ~0.30 GB/s |
 
+| Configuration | Instance Type | Transport | Throughput | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Standard TCP** | `g4dn.xlarge` | TCP/IP | **~0.56 GB/s** | Limited by standard Ethernet overhead. |
+| **Soft-RoCE** | `g4dn.xlarge` | RXE (Software) | **~0.30 GB/s** | Slower due to CPU emulation overhead of InfiniBand frames. |
+| **AWS EFA** | `g4dn.8xlarge` | **SRD (Hardware)** | **~2.56 GB/s** | **5x Speedup.** Limited by T4 GPU-to-CPU Copy (No GPUDirect). |
+
+*Note on EFA Speed:* The `g4dn.8xlarge` has a 50 Gbps (6.25 GB/s) network card. However, the NVIDIA T4 GPU does not support GPUDirect RDMA. Data must traverse `GPU -> CPU -> Network`, creating a CPU bottleneck around ~2.6 GB/s. This is the hardware limit of the instance, not the network.
+
 ## Prerequisites
 
 *   **Instance:** AWS EC2 `g4dn.xlarge` (or larger).
