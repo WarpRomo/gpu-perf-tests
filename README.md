@@ -150,7 +150,7 @@ cd efa_benchmark
 
 ### Troubleshooting EFA
 If the benchmark hangs or fails:
-1.  **Check Firewall:** EFA uses the SRD protocol, not TCP. Ensure your Security Group Inbound Rule allows **All Traffic**.
+1.  **Check Firewall:** EFA uses the SRD protocol. Ensure your Security Group Inbound / Outbound Rules allows traffic to **rebound to itself**.
 2.  **Disable Ptrace:** Ubuntu re-enables Ptrace on reboot. Run `sudo sysctl -w kernel.yama.ptrace_scope=0`.
-3.  **Test Hardware:** Run `/opt/amazon/efa/bin/fi_pingpong -p efa -e rdm`. If this hangs, it is a firewall issue.
+3.  **Test Hardware:** Run `/opt/amazon/efa/bin/fi_pingpong -p efa -e rdm`. If this hangs, but `ping <other instance>` does not, check your Inbound / Outbound rules.
         ```
